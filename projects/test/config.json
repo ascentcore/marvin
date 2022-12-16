@@ -1,0 +1,19 @@
+{
+  "path": "test",
+  "defaultTimeout": 3000,
+  "rootUrl": "http://localhost:4200",
+  "urlReplacers": [],
+  "optimizer": {
+    "exclude": [{
+      "type": "attribute",
+      "name": "id",
+      "regex": [":[a-z0-9]+:"]
+    }]
+  },
+  "aliases": {
+    "action": [],
+    "input": [],
+    "info": [],
+    "iterators": []
+  }
+}
