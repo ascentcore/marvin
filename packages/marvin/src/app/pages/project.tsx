@@ -79,9 +79,25 @@ export function Project() {
     }).then(() => loadOutput());
   };
 
+  const addAction = (route: string, action: any) => {
+    if (flowModel) {
+      if (!flowModel.actions[route]) {
+        flowModel.actions[route] = [];
+      }
+      flowModel?.actions[route].push(action);
+      fetch(`http://localhost:3000/api/projects/${name}/flow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: flowModel }),
+      }).then(() => loadFlow());
+    }
+  };
+
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={6} lg={4}>
         <Paper sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
@@ -90,24 +106,34 @@ export function Project() {
               aria-label="basic tabs example"
             >
               <Tab label="Config" />
-              <Tab label="Discovery" />
+              <Tab label="Methods" />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             {config && <Config config={config} saveFile={saveFile}></Config>}
           </TabPanel>
           <TabPanel value={value} index={1}>
-            {output && <Output output={output} run={() => run()}></Output>}
+            {output && (
+              <Output
+                output={output}
+                flow={flowModel}
+                addAction={addAction}
+                run={() => run()}
+              ></Output>
+            )}
           </TabPanel>
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} lg={8} >
         <Item>
           {config && flowModel && (
             <FlowComponent
               config={config}
               flowModel={flowModel}
-              saveFile={saveFile}
+              saveFile={(file: string, data: any) => {
+                saveFile(file, data);
+                loadFlow()
+              }}
             />
           )}
         </Item>
