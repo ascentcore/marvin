@@ -1,0 +1,58 @@
+{
+  "$id": "https://example.com/person.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Person",
+  "description": "Person Information",
+  "required": ["firstName", "lastName", "type", "phoneNumbers"],
+  "properties": {
+    "rootUrl": {
+      "type": "string",
+      "title": "Root Url",
+      "description": "Application base URL"
+    },
+    "defaultTimeout": {
+      "type": "integer",
+      "title": "Default Timeout",
+      "description": "Default timeout to wait for network idle"
+    },
+    "aliases": { "$ref": "#/definitions/Aliases" }
+  },
+  "definitions": {
+    "Aliases": {
+      "type": "object",
+      "title": "Aliases",
+      "properties": {
+        "info": { "title": "Info Selectors", "type": "array", "items": { "$ref": "#/definitions/Alias" } },
+        "action": { "title": "Action Selectors", "type": "array", "items": { "$ref": "#/definitions/Alias" } },
+        "input": { "title": "Input Selectors", "type": "array", "items": { "$ref": "#/definitions/Alias" } }
+      }
+    },
+    "Alias": {
+      "type": "object",
+      "title": "Alias",
+     
+      "description": "Alias",
+      "required": ["name", "selectors"],
+      "properties": {
+        "name": {
+          
+          "type": "string",
+          "title": "Name",
+          "description": "Alias name"
+        },
+        "selectors": {
+          "type": "array",
+          "registryKey": "selectors",
+          "title": "Selectors",
+          "description": "CSS Selector",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

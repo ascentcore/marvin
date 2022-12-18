@@ -2,9 +2,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "resolveJsonModule": true,
+    "strict": true,
   },
   "files": [],
   "include": [],

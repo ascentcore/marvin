@@ -5,6 +5,7 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@ascentcore/react-schema-form": "^0.2.0",
     "body-parser": "^1.20.1",
     "colors": "^1.4.0",
     "core-js": "^3.6.5",

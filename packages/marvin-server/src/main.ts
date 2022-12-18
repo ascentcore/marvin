@@ -103,14 +103,40 @@ app.get('/api/projects/:projectName/:file', (req, res) => {
   }
 });
 
+
+app.post('/api/projects/:projectName/:file', (req, res) => {
+  const { params, body } = req;
+  const { projectName, file } = params;
+  const { data } = body;
+
+  if (fs.existsSync(path.join(root, projectName))) {
+    try {
+      fs.writeFileSync(
+        path.join(root, projectName, `${file}.json`),
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      );
+      res.json(data)
+    } catch (e) {
+      res.status(400).send({ message: 'Error writing file' });
+    }
+  } else {
+    res.status(400).send({ message: 'Project does not exist!' });
+  }
+});
+
 /**
  * curl -X POST  http://localhost:3000/api/projects/test/run -H "Content-Type: application/json"
  */
-app.post('/api/projects/:projectName/run',  async (req, res, next) => {
+app.post('/api/run/:projectName',  async (req, res, next) => {
+  console.log('here')
   const { params } = req;
   const { projectName } = params;
-
-
+  const { body } = req;
+  console.log('hhhhere ')
   if (fs.existsSync(path.join(root, projectName))) {
     try {
       const configFile = fs.readFileSync(
@@ -118,14 +144,17 @@ app.post('/api/projects/:projectName/run',  async (req, res, next) => {
         'utf8'
       );
       const config = JSON.parse(configFile);
-      config.sequence = [];
-      console.log(config);
+      config.sequence = body.sequence || [];
+
+      console.log(config.sequence)
 
       const browser = await puppeteer.launch({ headless: true });
       const flow = new Flow(config, browser, path.join(root, projectName));
       const page = await flow.navigateTo(config.rootUrl);
       const state = new State(page);
       // const state = undefined;
+
+      console.log('running....')
 
       await page.setRequestInterception(true);
 

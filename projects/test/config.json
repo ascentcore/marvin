@@ -1,19 +1,32 @@
 {
   "path": "test",
+  "name": "MarvinDemo",
   "defaultTimeout": 3000,
   "rootUrl": "http://localhost:4200",
   "urlReplacers": [],
   "optimizer": {
-    "exclude": [{
-      "type": "attribute",
-      "name": "id",
-      "regex": [":[a-z0-9]+:"]
-    }]
+    "exclude": [
+      {
+        "type": "attribute",
+        "name": "id",
+        "regex": [
+          ":[a-z0-9]+:"
+        ]
+      }
+    ]
   },
   "aliases": {
     "action": [],
     "input": [],
-    "info": [],
+    "info": [
+      {
+        "name": "Title",
+        "selectors": [
+          ".title",
+          ".card-title"
+        ]
+      }
+    ],
     "iterators": []
   }
 }

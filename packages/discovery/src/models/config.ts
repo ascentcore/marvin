@@ -1,6 +1,5 @@
-import { exitCode } from 'process';
 
-export interface Config {
+export type Config = {
   path: string;
   defaultTimeout: number;
   urlReplacers: Replacer[];
