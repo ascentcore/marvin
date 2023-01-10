@@ -1,6 +1,6 @@
-import Discovery from '../discovery';
-import { Config } from '../models/config';
-import { PageDiscoveryResult } from '../models/models';
+import Discovery from '../../discovery';
+import { Config } from '../../models/config';
+import { PageDiscoveryResult } from '../../models/models';
 
 describe('Use of nth-of-type to identify the elements', () => {
   it('Same elements under the same div', async () => {

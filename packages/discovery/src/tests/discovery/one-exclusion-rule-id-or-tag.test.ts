@@ -1,6 +1,6 @@
-import Discovery from '../discovery';
-import { Config } from '../models/config';
-import { PageDiscoveryResult } from '../models/models';
+import Discovery from '../../discovery';
+import { Config } from '../../models/config';
+import { PageDiscoveryResult } from '../../models/models';
 
 describe('Test Discovery - One Exclusion rule - ID or Tag', () => {
   it('simple discovery test', async () => {

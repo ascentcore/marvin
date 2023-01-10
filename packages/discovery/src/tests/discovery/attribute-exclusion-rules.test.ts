@@ -1,6 +1,6 @@
-import Discovery from '../discovery';
-import { Config } from '../models/config';
-import { PageDiscoveryResult } from '../models/models';
+import Discovery from '../../discovery';
+import { Config } from '../../models/config';
+import { PageDiscoveryResult } from '../../models/models';
 
 describe('Test Discovery - attribute exclusion rule', () => {
   it('exclusion - attribute - only name - single match', async () => {
